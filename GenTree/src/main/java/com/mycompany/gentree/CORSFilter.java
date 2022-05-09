@@ -24,4 +24,3 @@ public class CORSFilter implements ContainerResponseFilter {
    }
 
 }
-

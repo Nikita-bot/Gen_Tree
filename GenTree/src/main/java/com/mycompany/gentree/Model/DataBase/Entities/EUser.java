@@ -1,4 +1,4 @@
-package com.mycompany.gentree.resources.DataBase.Entitys;
+package com.mycompany.gentree.Model.DataBase.Entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "users")
+@Table(name = "User")
 public class EUser {
     @Id
     @Column(name = "id")
