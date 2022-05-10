@@ -5,8 +5,7 @@
 package com.mycompany.gentree.Controller;
 
 import com.mycompany.gentree.Model.IApp;
-import com.mycompany.gentree.Model.IDataBase;
-import com.mycompany.gentree.Model.DataBase.DataBase;
+import com.mycompany.gentree.Model.DataBase.IDataBase;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Path;
@@ -35,6 +34,9 @@ public class Registration {
     
     @Inject
     private IApp app;
+    @Inject
+    private IDataBase db;
+    
     
     @POST
     @Path("/register")
@@ -45,9 +47,9 @@ public class Registration {
         System.out.println(data);
         Jsonb jb = JsonbBuilder.create();
 
-        User user = jb.fromJson(data,User.class);
-        DataBase db = new DataBase();
-        db.registration(data)
+        User user = jb.fromJson("{\"name\":\"Arseniy\",\"secondName\":\"Kalinko\",\"fathersName\":\"Evgenievizh\",\"email\":\"ars050402@gmail.com\",\"password\":\"123\"}",User.class);
+        System.out.println(user.getEmail());
+        db.registration(user);
         Response.ResponseBuilder rb = Response.ok("Registration Complete");
         Response response = rb.build(); 
         return response;

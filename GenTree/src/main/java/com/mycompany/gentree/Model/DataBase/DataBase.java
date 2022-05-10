@@ -22,19 +22,25 @@ public class DataBase implements IDataBase{
     @PersistenceContext(unitName = "GenTree_Unit")
     private EntityManager entityManager;
 
-    @Override
+    public DataBase() {
+    }
+    
+    //@Override
     public String registration(User data) {
         System.out.println("DataBase::Registration");
         try{
             uTransaction.begin();
             try{
-                EUser eUser = new EUser(data.getEmail(), data.getPassword());
+                EUser eUser = new EUser(1, data.getEmail(), data.getPassword());
                 entityManager.persist(eUser);
             }
             catch(Exception e){
                 System.out.println("Error when incert new User: ");
                 e.printStackTrace();
             }
+            System.out.println("DataBase::BeforeCommit");
+            uTransaction.commit();
+            System.out.println("DataBase::AfterCommit");
         }
         catch(Exception e){
             System.out.println("Error when transaction init:");
