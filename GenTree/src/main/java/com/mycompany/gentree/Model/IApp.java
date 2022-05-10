@@ -9,5 +9,5 @@ package com.mycompany.gentree.Model;
  * @author 4eis
  */
 public interface IApp {
-    
+    void init(String login, String pass);
 }

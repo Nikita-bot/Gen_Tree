@@ -4,6 +4,9 @@
  */
 package com.mycompany.gentree.Controller;
 
+import com.mycompany.gentree.Model.IApp;
+
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Path;
 
 import jakarta.ws.rs.GET;
@@ -26,6 +29,10 @@ import org.json.simple.parser.JSONParser;
 
 @Path("/")
 public class Registration {
+    
+    @Inject
+    private IApp app;
+    
     @POST
     @Path("/register")
     @Produces("text/plain") //Что возвращает
