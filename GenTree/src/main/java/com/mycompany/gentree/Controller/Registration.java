@@ -5,6 +5,8 @@
 package com.mycompany.gentree.Controller;
 
 import com.mycompany.gentree.Model.IApp;
+import com.mycompany.gentree.Model.IDataBase;
+import com.mycompany.gentree.Model.DataBase.DataBase;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Path;
@@ -20,6 +22,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.json.bind.JsonbException;
+import jakarta.jws.soap.SOAPBinding.Use;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,11 @@ public class Registration {
     //        .header("text/plain", "value2")
     public Response register(String data){
         System.out.println(data);
+        Jsonb jb = JsonbBuilder.create();
+
+        User user = jb.fromJson(data,User.class);
+        DataBase db = new DataBase();
+        db.registration(data)
         Response.ResponseBuilder rb = Response.ok("Registration Complete");
         Response response = rb.build(); 
         return response;

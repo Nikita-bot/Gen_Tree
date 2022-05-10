@@ -4,9 +4,12 @@
  */
 package com.mycompany.gentree.Model.DataBase;
 
+import com.mycompany.gentree.Controller.User;
+
 /*
  *
  * @author 4eis
  */
 public interface IDataBase {
+    public String registration(User data);
 }
