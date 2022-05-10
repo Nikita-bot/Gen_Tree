@@ -2,13 +2,18 @@ package com.mycompany.gentree.Model.DataBase.Entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "User")
+@Table(name = "users")
 public class EUser {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id_seq")
+    @SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
     @Column(name = "id")
     private int userId;
     @Column(name = "login")
@@ -16,8 +21,7 @@ public class EUser {
     @Column(name = "password")
     private String userPassword;
 
-    public EUser(int userId, String userLogin, String userPassword) {
-        this.userId = userId;
+    public EUser(String userLogin, String userPassword) {
         this.userLogin = userLogin;
         this.userPassword = userPassword;
     }

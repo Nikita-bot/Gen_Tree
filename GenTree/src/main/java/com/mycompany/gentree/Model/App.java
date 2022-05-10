@@ -6,14 +6,14 @@ package com.mycompany.gentree.Model;
 
 import com.mycompany.gentree.Model.DataBase.IDataBase;
 
+import jakarta.inject.Inject;
+
 /**
  *
  * @author 4eis
  */
 public class App implements IApp{
-    public IDataBase db;
     
     public void init(String login, String pass){
-        
     }
 }
