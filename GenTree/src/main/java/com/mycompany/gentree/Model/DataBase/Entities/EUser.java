@@ -9,27 +9,19 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "User")
+@Table(name = "users")
 public class EUser {
     @Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id_seq")
-    //@SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
+    @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq", allocationSize = 1)
     @Column(name = "id")
     private int userId;
     @Column(name = "login")
     private String userLogin;
     @Column(name = "password")
     private String userPassword;
-    
-    public EUser() {
- 
-    }
 
-    public EUser(int id, String userLogin, String userPassword) {
-        this.userLogin = userLogin;
-        this.userPassword = userPassword;
-        this.userId = id;
-    }
+    
     public int getUserId() {
         return userId;
     }

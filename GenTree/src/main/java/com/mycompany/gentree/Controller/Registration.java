@@ -10,7 +10,7 @@ import com.mycompany.gentree.Model.DataBase.IDataBase;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Path;
 
-import jakarta.ws.rs.GET;
+
 import jakarta.ws.rs.POST;
 
 import jakarta.ws.rs.Produces;
@@ -20,14 +20,7 @@ import jakarta.ws.rs.core.Response;
 
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
-import jakarta.json.bind.JsonbException;
-import jakarta.jws.soap.SOAPBinding.Use;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 @Path("/")
 public class Registration {

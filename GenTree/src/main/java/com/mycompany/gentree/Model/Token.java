@@ -4,7 +4,7 @@
  */
 package com.mycompany.gentree.Model;
 
-import java.security.SecureRandom;
+
 import java.security.Key;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -18,7 +18,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
+
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;

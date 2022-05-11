@@ -31,8 +31,10 @@ public class DataBase implements IDataBase{
         try{
             uTransaction.begin();
             try{
-                EUser eUser = new EUser(1, data.getEmail(), data.getPassword());
-                entityManager.persist(eUser);
+                EUser eUser = new EUser();
+                eUser.setUserLogin(data.getEmail());
+                eUser.setUserPassword(data.getPassword());
+                entityManager.merge(eUser);
             }
             catch(Exception e){
                 System.out.println("Error when incert new User: ");

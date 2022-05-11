@@ -1,8 +1,6 @@
 package com.mycompany.gentree.resources;
 
 import jakarta.ws.rs.Produces;
-import jakarta.json.bind.Jsonb;
-import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.Consumes;
 
 import jakarta.ws.rs.POST;
@@ -20,7 +18,7 @@ public class JakartaEE9Resource {
     @Consumes("text/plain")
     @Produces("application/JSON")
     public Response Register(){
-        Jsonb jb = JsonbBuilder.create();
+
         String res = "";
 
         Response.ResponseBuilder rb = Response.ok(res);

@@ -4,10 +4,6 @@
  */
 package com.mycompany.gentree.Model;
 
-import com.mycompany.gentree.Model.DataBase.IDataBase;
-
-import jakarta.inject.Inject;
-
 /**
  *
  * @author 4eis
