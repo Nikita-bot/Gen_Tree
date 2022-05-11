@@ -4,6 +4,8 @@
  */
 package com.mycompany.gentree.Controller;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import com.mycompany.gentree.Model.IApp;
 import com.mycompany.gentree.Model.DataBase.IDataBase;
 
@@ -40,8 +42,13 @@ public class Registration {
         System.out.println(data);
         Jsonb jb = JsonbBuilder.create();
 
-        User user = jb.fromJson("{\"name\":\"Arseniy\",\"secondName\":\"Kalinko\",\"fathersName\":\"Evgenievizh\",\"email\":\"ars050402@gmail.com\",\"password\":\"123\"}",User.class);
-        System.out.println(user.getEmail());
+        User user = jb.fromJson("{\"userId\": 1,\"date_of_bith\":\"2020:05:10\",\"name\":\"Arseniy\",\"secondName\":\"Kalinko\",\"fathersName\":\"Evgenievizh\",\"date_of_death\":\"2022:06:10\"}",User.class);
+        System.out.println(user.getUserId());
+        System.out.println(user.getName());
+        System.out.println(user.getSecondName());
+        System.out.println(user.getFathersName());
+        System.out.println(user.getDate_of_bith());
+        System.out.println(user.getDate_of_death());
         db.registration(user);
         Response.ResponseBuilder rb = Response.ok("Registration Complete");
         Response response = rb.build(); 
