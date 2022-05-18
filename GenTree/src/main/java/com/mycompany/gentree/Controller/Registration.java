@@ -12,6 +12,7 @@ import com.mycompany.gentree.Model.DataBase.IDataBase;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Path;
 
+import com.mycompany.gentree.Controller.User;
 
 import jakarta.ws.rs.POST;
 
@@ -39,17 +40,22 @@ public class Registration {
     @Consumes("text/plain") //что принимает
     //        .header("text/plain", "value2")
     public Response register(String data){
-        System.out.println(data);
+        //System.out.println(data);
         Jsonb jb = JsonbBuilder.create();
 
-        User user = jb.fromJson("{\"userId\": 1,\"date_of_bith\":\"2020:05:10\",\"name\":\"Arseniy\",\"secondName\":\"Kalinko\",\"fathersName\":\"Evgenievizh\",\"date_of_death\":\"2022:06:10\"}",User.class);
-        System.out.println(user.getUserId());
+        User user = jb.fromJson("{\"email\":\"test@mail.com\", \"password\":\"123\",\"date_of_bith\":\"2020:05:10\",\"name\":\"Test\",\"secondName\":\"Test\",\"fathersName\":\"Test\"}",User.class);
+
         System.out.println(user.getName());
+        //System.out.println(user.getUserId());
         System.out.println(user.getSecondName());
         System.out.println(user.getFathersName());
-        System.out.println(user.getDate_of_bith());
-        System.out.println(user.getDate_of_death());
-        db.registration(user);
+        System.out.println(user.getDate_of_birth());
+        //System.out.println(user.getDate_of_death());
+        Integer id = db.registrationUser(user);
+        if(id != 0){
+            user.setUserId(id);
+        }
+        db.createPerson(user);
         Response.ResponseBuilder rb = Response.ok("Registration Complete");
         Response response = rb.build(); 
         return response;

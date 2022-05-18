@@ -11,5 +11,6 @@ import com.mycompany.gentree.Controller.User;
  * @author 4eis
  */
 public interface IDataBase {
-    public String registration(User data);
+    public Integer registrationUser(User data);
+    public String createPerson(User data);
 }

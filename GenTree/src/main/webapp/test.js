@@ -7,7 +7,7 @@ export function func(){
     console.log("func");
     funcAsync("data")
     .then(function(answer){
-        console.log("async");
+        console.log(answer);
     });
 }
 

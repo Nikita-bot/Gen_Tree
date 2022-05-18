@@ -3,23 +3,23 @@ package com.mycompany.gentree.Controller;
 import java.util.GregorianCalendar;
 
 public class User {
-    private int id;
+    private Integer id;
     private String name;
     private String secondName;
     private String fathersName;
     private String email;
     private String password;
-    private int userId;
+    private Integer userId;
     private String date_of_bith;
-    private String date_of_death;
+    private String date_of_death = "0";
     
     public String getName() {
         return name;
     }
-    public int getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public void setName(String name) {
@@ -49,13 +49,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
-    public String getDate_of_bith() {
+    public String getDate_of_birth() {
         return date_of_bith;
     }
     public void setDate_of_bith(String date_of_bith) {

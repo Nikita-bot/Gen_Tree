@@ -21,7 +21,7 @@ public class EPerson {
     @Column(name = "id")
     private int id;
     @Column(name = "user_id")
-    private int userId;
+    private Integer userId;
     @Column(name = "name")
     private String name;
     @Column(name = "second_name")
@@ -42,14 +42,15 @@ public class EPerson {
         this.id = id;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
-
+    
+    
     public String getSecond_name() {
         return second_name;
     }
@@ -66,11 +67,11 @@ public class EPerson {
         this.father_name = father_name;
     }
 
-    public Date getDate_of_bith() {
+    public Date getDate_of_birth() {
         return date_of_bith;
     }
 
-    public void setDate_of_bith(Date date_of_bith) {
+    public void setDate_of_birth(Date date_of_bith) {
         this.date_of_bith = date_of_bith;
     }
 

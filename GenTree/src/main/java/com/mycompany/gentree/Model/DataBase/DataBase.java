@@ -15,6 +15,8 @@ import com.mycompany.gentree.Model.DataBase.Entities.EUser;
 import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.UserTransaction;
 
 /**
@@ -31,33 +33,68 @@ public class DataBase implements IDataBase{
     }
     
     //@Override
-    public String registration(User data) {
-        System.out.println("DataBase::Registration");
+    public Integer registrationUser(User data){
+                System.out.println("DataBase::registrationUser");
+        Integer id = 0;
+        try{
+            uTransaction.begin();
+            try{ 
+                EUser eUser = new EUser();
+                eUser.setUserLogin(data.getEmail());
+                eUser.setUserPassword(data.getPassword());
+                System.out.println(eUser.getUserLogin());
+                System.out.println(eUser.getUserPassword());
+                //entityManager.merge(eUser);
+                
+                entityManager.persist(eUser);
+                
+                TypedQuery<EUser> query = entityManager.createQuery("SELECT e FROM EUser e WHERE e.userLogin = :login AND e.userPassword = :password", EUser.class)
+                        .setParameter("login", data.getEmail())
+                        .setParameter("password", data.getPassword());
+                
+                eUser = query.getSingleResult();
+                id = eUser.getUserId();
+            }
+            catch(Exception e){
+                System.out.println("Error when insert new User: ");
+                e.printStackTrace();
+            }
+            System.out.println("DataBase::BeforeCommit");
+            uTransaction.commit();
+            System.out.println("DataBase::AfterCommit");
+        }
+        catch(Exception e){
+            System.out.println("Error when transaction init:");
+            e.printStackTrace();
+        }
+        return id;
+        
+    }
+    
+    public String createPerson(User data) {
+        System.out.println("DataBase::CreatePerson");
         try{
             uTransaction.begin();
             try{
-                // EUser eUser = new EUser();
-                // eUser.setUserLogin(data.getEmail());
-                // eUser.setUserPassword(data.getPassword());
-                // entityManager.merge(eUser);
+                
                 DateFormat dateFormat = new SimpleDateFormat("yy:MM:dd");
                 dateFormat.setLenient(false);
-                Date bith = dateFormat.parse(data.getDate_of_bith());
-                System.out.println(bith);
-                Date dead = dateFormat.parse(data.getDate_of_death());
-                System.out.println(dead);
-
+                Date bith = dateFormat.parse(data.getDate_of_birth());
+                //System.out.println(bith);
                 EPerson ePerson = new EPerson();
-                ePerson.setDate_of_death(dead);
-                ePerson.setDate_of_bith(bith);
+                if(!data.getDate_of_death().equals("0")){
+                    Date dead = dateFormat.parse(data.getDate_of_death());
+                    ePerson.setDate_of_death(dead);
+                }
                 ePerson.setUserId(data.getUserId());
+                ePerson.setDate_of_birth(bith);
                 ePerson.setSecond_name(data.getSecondName());
                 ePerson.setName(data.getName());
                 ePerson.setFather_name(data.getFathersName());
                 entityManager.persist(ePerson);
             }
             catch(Exception e){
-                System.out.println("Error when incert new User: ");
+                System.out.println("Error when insert new User: ");
                 e.printStackTrace();
             }
             System.out.println("DataBase::BeforeCommit");
