@@ -4,7 +4,6 @@
  */
 package com.mycompany.gentree.Controller;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 import com.mycompany.gentree.Model.IApp;
 import com.mycompany.gentree.Model.DataBase.IDataBase;
@@ -12,7 +11,7 @@ import com.mycompany.gentree.Model.DataBase.IDataBase;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Path;
 
-import com.mycompany.gentree.Controller.User;
+
 
 import jakarta.ws.rs.POST;
 
@@ -43,21 +42,22 @@ public class Registration {
         //System.out.println(data);
         Jsonb jb = JsonbBuilder.create();
 
-        User user = jb.fromJson("{\"email\":\"test@mail.com\", \"password\":\"123\",\"date_of_bith\":\"2020:05:10\",\"name\":\"Test\",\"secondName\":\"Test\",\"fathersName\":\"Test\"}",User.class);
-
-        System.out.println(user.getName());
-        //System.out.println(user.getUserId());
-        System.out.println(user.getSecondName());
-        System.out.println(user.getFathersName());
-        System.out.println(user.getDate_of_birth());
-        //System.out.println(user.getDate_of_death());
-        Integer id = db.registrationUser(user);
-        if(id != 0){
-            user.setUserId(id);
+        Person person = jb.fromJson("{\"email\":\"test@mail.com\", \"password\":\"123\",\"date_of_bith\":\"2020:05:10\",\"name\":\"Test\",\"secondName\":\"Test\",\"fathersName\":\"Test\"}",Person.class);
+        if(db.checkPersonInDataBase(person)){
+            Integer id = db.registrationPerson(person);
+            if(id != 0){
+                person.setUserId(id);
+            }
+            db.createPerson(person);
+            Response.ResponseBuilder rb = Response.ok("Registration Complete");
+            Response response = rb.build(); 
+            return response;
         }
-        db.createPerson(user);
-        Response.ResponseBuilder rb = Response.ok("Registration Complete");
-        Response response = rb.build(); 
-        return response;
+        else{
+            Response.ResponseBuilder rb = Response.ok("Such User already exist");
+            Response response = rb.build(); 
+            return response;
+        }
+        
     }
 }

@@ -33,17 +33,11 @@ import java.util.Base64;
 public class Token {
     
     public static String generateToken(String login){
-        //eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInNjb3BlIjoidXNlciIsImlhdCI6MTY0NjIzMDU0MCwiZXhwIjoxNjQ2MjY2NTQwfQ.7nyrH_bvAbLehl5lQfQakr6d1JtXKunyREGmuH1
-        /*
-        String testToken = Token.generateHash(login);
-        System.out.println(testToken);
-        
-        //String token = login + "." + "password" + "," + "Exodus";
-        */
+
         TokenKey tokenKey = new TokenKey();		
         Key key = tokenKey.getKey();
 		
-	TokenIssuer ti = new TokenIssuer(key);
+	    TokenIssuer ti = new TokenIssuer(key);
         String testToken = ti.issueToken(login);		
         System.out.println(testToken);
         
@@ -52,20 +46,6 @@ public class Token {
     
     public static String checkToken(String data, String login){
 
-        /*
-        String token = Token.generateToken(login);
-       
-        System.out.println("login: " + login);
-        System.out.println("token: " + token);
-        System.out.println("data: " + data);
-        if(token.equals(data)){
-            return login;
-        }
-        
-        else{
-            return "Wrong token";
-        }
-        */
         TokenKey tokenKey = new TokenKey();
         Key key = tokenKey.getKey();
         TokenValidator tv = new TokenValidator(key);				
@@ -79,27 +59,6 @@ public class Token {
         return "0";
     }
     
-    /*
-    public static String generateHash(String login){
-        JSONObject header = new JSONObject();
-        header.put("alg", "HS256");
-        header.put("type", "JWT");
-        byte[] headerBytes = Base64.getEncoder().encode(header.toJSONString().getBytes());
-        System.out.println("Header encoded bytes: " + headerBytes);
-        
-        JSONObject data = new JSONObject();
-        data.put("login", login);
-        byte[] dataBytes = Base64.getEncoder().encode(data.toJSONString().getBytes());
-        
-        String headerString = new String(headerBytes, StandardCharsets.UTF_8);
-        String dataString = new String(dataBytes, StandardCharsets.UTF_8);
-        
-        String signatureString = headerString + "." + dataString + "Exodus";
-        byte[] signatureBytes = Base64.getEncoder().encode(signatureString.getBytes());
-        String hash = headerString + "." + dataString + "." + new String(signatureBytes, StandardCharsets.UTF_8);
-        return hash;
-    }
-    */
     
     
     public static String decodeToken(String token){

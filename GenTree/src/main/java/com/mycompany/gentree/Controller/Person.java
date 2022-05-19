@@ -1,8 +1,7 @@
 package com.mycompany.gentree.Controller;
 
-import java.util.GregorianCalendar;
 
-public class User {
+public class Person {
     private Integer id;
     private String name;
     private String secondName;

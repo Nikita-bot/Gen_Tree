@@ -4,13 +4,14 @@
  */
 package com.mycompany.gentree.Model.DataBase;
 
-import com.mycompany.gentree.Controller.User;
+import com.mycompany.gentree.Controller.Person;
 
 /*
  *
  * @author 4eis
  */
 public interface IDataBase {
-    public Integer registrationUser(User data);
-    public String createPerson(User data);
+    public Integer registrationPerson(Person data);
+    public String createPerson(Person data);
+    public boolean checkPersonInDataBase(Person data);
 }
