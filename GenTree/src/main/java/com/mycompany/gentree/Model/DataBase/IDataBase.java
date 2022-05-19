@@ -4,6 +4,9 @@
  */
 package com.mycompany.gentree.Model.DataBase;
 
+
+import java.util.List;
+
 import com.mycompany.gentree.Controller.Person;
 
 /*
@@ -14,4 +17,5 @@ public interface IDataBase {
     public Integer registrationPerson(Person data);
     public String createPerson(Person data);
     public boolean checkPersonInDataBase(Person data);
+    public List<String[]> getRelatives(Integer id);
 }

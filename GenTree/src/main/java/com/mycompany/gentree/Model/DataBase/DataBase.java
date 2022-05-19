@@ -6,16 +6,19 @@ package com.mycompany.gentree.Model.DataBase;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.mycompany.gentree.Controller.Person;
 import com.mycompany.gentree.Model.DataBase.Entities.EPerson;
+import com.mycompany.gentree.Model.DataBase.Entities.ERelative;
 import com.mycompany.gentree.Model.DataBase.Entities.EUser;
 
 import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.UserTransaction;
 
@@ -111,6 +114,7 @@ public class DataBase implements IDataBase{
 
     @Override
     public boolean checkPersonInDataBase(Person data) {
+        System.out.println("DataBase::checkPersonInDataBase");
         try{
             uTransaction.begin();
             try{ 
@@ -138,6 +142,42 @@ public class DataBase implements IDataBase{
         }
         return false;
 
+    }
+
+    @Override
+    public List<String[]> getRelatives(Integer id) {
+        System.out.println("DataBase::getRelatives");
+        List<String[]> rel = new ArrayList<String[]>() ;
+        try 
+        {
+            uTransaction.begin();
+            try{
+                TypedQuery<ERelative> query = entityManager.createQuery("SELECT r from ERelative r where r.personId =: id",ERelative.class)
+                    .setParameter("id",id);
+
+                List<ERelative> relatives = query.getResultList();
+
+                for (ERelative e: relatives){
+                    rel.add(new String[]{Integer.toString(e.getRelId()),e.getRole()});
+                }
+                /*
+                Пример доставания данных
+                for (String[] rels : rel) {
+                    System.out.println("Row = " + row); //Выведет строку:  Row = [rel_id,role]
+                } 
+                */
+            }
+            catch(Exception e){
+                System.out.println("Error Select QUERY");
+            }
+            
+            uTransaction.commit();		
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Error Select");
+        } 
+        return rel; 
     }
 
 
