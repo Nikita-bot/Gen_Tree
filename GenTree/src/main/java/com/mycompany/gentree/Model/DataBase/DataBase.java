@@ -114,9 +114,10 @@ public class DataBase implements IDataBase{
     }
 
     @Override
-    public boolean checkPersonInDataBase(Person data) {
+    public Integer checkPersonInDataBase(Person data) {
 
         System.out.println("DataBase::checkPersonInDataBas");
+        Integer id =0;
         try{
             uTransaction.begin();
             try{ 
@@ -129,7 +130,7 @@ public class DataBase implements IDataBase{
                 
                 eUser = query.getSingleResult();
                 System.out.println(eUser);
-                return true;
+                id = eUser.getUserId();
             }
             catch(Exception e){
                 System.out.println("Error when insert new User: ");
@@ -138,13 +139,13 @@ public class DataBase implements IDataBase{
             System.out.println("DataBase::BeforeCommit");
             uTransaction.commit();
             System.out.println("DataBase::AfterCommit");
-            return true;
+            return id;
         }
         catch(Exception e){
             System.out.println("Error when transaction init:");
             e.printStackTrace();
         }
-        return false;
+        return id;
 
     }
 

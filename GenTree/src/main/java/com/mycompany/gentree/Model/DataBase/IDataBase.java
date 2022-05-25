@@ -17,6 +17,6 @@ public interface IDataBase {
     //test
     public Integer registrationPerson(Person data);
     public String createPerson(Person data);
-    public boolean checkPersonInDataBase(Person data);
+    public Integer checkPersonInDataBase(Person data);
     public List<String[]> getRelatives(Integer id);
 }

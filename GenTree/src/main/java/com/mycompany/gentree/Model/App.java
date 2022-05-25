@@ -25,7 +25,8 @@ public class App implements IApp{
     public String registration(String data){
         Jsonb jb = JsonbBuilder.create();
         Person person = jb.fromJson(data, Person.class);
-        if(db.checkPersonInDataBase(person)){
+
+        if(db.checkPersonInDataBase(person) == 0){
             Integer id = db.registrationPerson(person);
             if(id != 0){
                 person.setUserId(id);
@@ -41,7 +42,8 @@ public class App implements IApp{
     public String loginization(String data){
         Jsonb jb = JsonbBuilder.create();
         Person person = jb.fromJson(data, Person.class);
-        if(db.checkPersonInDataBase(person)){
+        Integer user_id = db.checkPersonInDataBase(person);
+        if(user_id == 0){
             String token = Token.generateToken(person.getEmail());
             return "0";
         }
