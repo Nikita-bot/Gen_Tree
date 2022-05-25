@@ -14,6 +14,7 @@ import com.mycompany.gentree.Controller.Person;
  * @author 4eis
  */
 public interface IDataBase {
+    //test
     public Integer registrationPerson(Person data);
     public String createPerson(Person data);
     public boolean checkPersonInDataBase(Person data);

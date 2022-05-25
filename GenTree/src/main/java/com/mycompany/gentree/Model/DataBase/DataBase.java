@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.mycompany.gentree.Controller.Person;
+
 import com.mycompany.gentree.Model.DataBase.Entities.EPerson;
 import com.mycompany.gentree.Model.DataBase.Entities.ERelative;
 import com.mycompany.gentree.Model.DataBase.Entities.EUser;
@@ -114,7 +115,8 @@ public class DataBase implements IDataBase{
 
     @Override
     public boolean checkPersonInDataBase(Person data) {
-        System.out.println("DataBase::checkPersonInDataBase");
+
+        System.out.println("DataBase::checkPersonInDataBas");
         try{
             uTransaction.begin();
             try{ 
@@ -126,6 +128,7 @@ public class DataBase implements IDataBase{
                         .setParameter("password", data.getPassword());
                 
                 eUser = query.getSingleResult();
+                System.out.println(eUser);
                 return true;
             }
             catch(Exception e){
@@ -135,6 +138,7 @@ public class DataBase implements IDataBase{
             System.out.println("DataBase::BeforeCommit");
             uTransaction.commit();
             System.out.println("DataBase::AfterCommit");
+            return true;
         }
         catch(Exception e){
             System.out.println("Error when transaction init:");

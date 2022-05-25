@@ -4,6 +4,11 @@
  */
 package com.mycompany.gentree.Controller;
 
+/**
+ *
+ * @author 4eis
+ */
+
 
 import com.mycompany.gentree.Model.IApp;
 import com.mycompany.gentree.Model.DataBase.IDataBase;
@@ -23,22 +28,23 @@ import jakarta.ws.rs.core.Response;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
+import jakarta.ws.rs.Path;
+
 
 @Path("/")
-public class Registration {
-    
+
+public class Loginization {
     @Inject
     private IApp app;
     
     @POST
-    @Path("/register")
+    @Path("/login")
     @Produces("text/plain") //Что возвращает
     @Consumes("text/plain") //что принимает
-    //        .header("text/plain", "value2")
-    public Response register(String data){
-        String answer = app.registration(data);
-        //System.out.println(data);
-        Response.ResponseBuilder rb = Response.ok(answer);
+    public Response login(String data){
+        
+        String answer = app.loginization(data);
+        Response.ResponseBuilder rb = Response.ok("");
         Response response = rb.build(); 
         return response;
     }
