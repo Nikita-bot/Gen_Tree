@@ -60,7 +60,7 @@ public class App implements IApp{
         Integer id = Integer.parseInt(login.substring(login.indexOf(' ') + 1, login.length()));
         System.out.println(id);
         List<String[]> relatives = db.getRelatives(id);
-        System.out.println(relatives);
+        System.out.println(relatives.get(0)[1]);
         return "";
     }
 }

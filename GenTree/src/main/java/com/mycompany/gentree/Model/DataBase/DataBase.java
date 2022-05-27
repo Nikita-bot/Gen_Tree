@@ -161,11 +161,14 @@ public class DataBase implements IDataBase{
         {
             uTransaction.begin();
             try{
-                TypedQuery<ERelative> query = entityManager.createQuery("SELECT r from ERelative r where r.personId =: id",ERelative.class)
-                    .setParameter("id",id);
-
+                ERelative eRelative = new ERelative();
+                System.out.println("DataBase:TypedQuery");
+                //TypedQuery<EUser> query = entityManager.createQuery("SELECT e FROM EUser e WHERE e.userLogin = :login AND e.userPassword = :password", EUser.class)
+                TypedQuery<ERelative> query = entityManager.createQuery("SELECT r FROM ERelative r WHERE r.personId = :id", ERelative.class)
+                    .setParameter("id", id);
+                System.out.println("DataBase:query.getResultList()");
                 List<ERelative> relatives = query.getResultList();
-
+                System.out.println("DataBase:add relatiev to list");
                 for (ERelative e: relatives){
                     rel.add(new String[]{Integer.toString(e.getRelId()),e.getRole()});
                 }
