@@ -44,19 +44,19 @@ public class Token {
         return testToken;
     }
     
-    public static String checkToken(String data, String login){
-
+    public static String checkToken(String data){
+        String user = "0";
         TokenKey tokenKey = new TokenKey();
         Key key = tokenKey.getKey();
         TokenValidator tv = new TokenValidator(key);				
 		try {
-		  String user = tv.validate(data);		
+		  user = tv.validate(data);		
 		  System.out.println("Validating... OK: " + user);						
 		}
                 catch (Exception e) {
 		  System.out.println("Validating... Error: " + e.getMessage());						
 		}
-        return "0";
+        return user;
     }
     
     

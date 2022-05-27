@@ -117,7 +117,7 @@ public class DataBase implements IDataBase{
     public Integer checkPersonInDataBase(Person data) {
 
         System.out.println("DataBase::checkPersonInDataBas");
-        Integer id =0;
+        Integer id = 0;
         try{
             uTransaction.begin();
             try{ 
@@ -127,7 +127,7 @@ public class DataBase implements IDataBase{
                 TypedQuery<EUser> query = entityManager.createQuery("SELECT e FROM EUser e WHERE e.userLogin = :login AND e.userPassword = :password", EUser.class)
                         .setParameter("login", data.getEmail())
                         .setParameter("password", data.getPassword());
-                
+                System.out.println(data.getEmail() + " " + data.getPassword());
                 eUser = query.getSingleResult();
                 System.out.println(eUser);
                 id = eUser.getUserId();

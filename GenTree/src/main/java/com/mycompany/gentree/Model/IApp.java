@@ -12,4 +12,5 @@ public interface IApp {
     void init(String login, String pass);
     String registration(String data);
     String loginization(String data);
+    String personalData(String data);
 }

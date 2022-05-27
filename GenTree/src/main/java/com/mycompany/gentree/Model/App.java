@@ -9,6 +9,7 @@ import com.mycompany.gentree.Model.DataBase.IDataBase;
 import jakarta.inject.Inject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
+import java.util.List;
 
 /**
  *
@@ -43,13 +44,23 @@ public class App implements IApp{
         Jsonb jb = JsonbBuilder.create();
         Person person = jb.fromJson(data, Person.class);
         Integer user_id = db.checkPersonInDataBase(person);
-        if(user_id == 0){
-            String token = Token.generateToken(person.getEmail());
-            return "0";
+        if(user_id != 0){
+            String token = Token.generateToken(person.getEmail() + " " + Integer.toString(user_id));
+            Token.checkToken(token);
+            return token;
         }
         else{
             return "Wrong mail or password";
         }
         
+    }
+    
+    public String personalData(String data){
+        String login = Token.checkToken(data);
+        Integer id = Integer.parseInt(login.substring(login.indexOf(' ') + 1, login.length()));
+        System.out.println(id);
+        List<String[]> relatives = db.getRelatives(id);
+        System.out.println(relatives);
+        return "";
     }
 }

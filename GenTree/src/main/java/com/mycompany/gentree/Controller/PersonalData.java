@@ -9,9 +9,7 @@ package com.mycompany.gentree.Controller;
  * @author 4eis
  */
 
-
 import com.mycompany.gentree.Model.IApp;
-import com.mycompany.gentree.Model.DataBase.IDataBase;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Path;
@@ -32,18 +30,17 @@ import jakarta.ws.rs.Path;
 
 
 @Path("/")
-
-public class Loginization {
+public class PersonalData {
     @Inject
     private IApp app;
     
     @POST
-    @Path("/login")
+    @Path("/personalData")
     @Produces("text/plain") //Что возвращает
     @Consumes("text/plain") //что принимает
-    public Response login(String data){
+    public Response personalData(String data){
         
-        String answer = app.loginization(data);
+        String answer = app.personalData(data);
         Response.ResponseBuilder rb = Response.ok(answer);
         Response response = rb.build(); 
         return response;
