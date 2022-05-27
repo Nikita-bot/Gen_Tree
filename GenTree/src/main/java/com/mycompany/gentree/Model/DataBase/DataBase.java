@@ -127,10 +127,14 @@ public class DataBase implements IDataBase{
                 TypedQuery<EUser> query = entityManager.createQuery("SELECT e FROM EUser e WHERE e.userLogin = :login AND e.userPassword = :password", EUser.class)
                         .setParameter("login", data.getEmail())
                         .setParameter("password", data.getPassword());
-                System.out.println(data.getEmail() + " " + data.getPassword());
                 eUser = query.getSingleResult();
-                System.out.println(eUser);
-                id = eUser.getUserId();
+
+                EPerson ePerson = new EPerson();
+                TypedQuery<EPerson> query1 = entityManager.createQuery("SELECT e FROM EPerson e WHERE e.userId = :id ", EPerson.class)
+                        .setParameter("id", eUser.getUserId());
+
+                ePerson = query1.getSingleResult();
+                id = ePerson.getId();
             }
             catch(Exception e){
                 System.out.println("Error when insert new User: ");
