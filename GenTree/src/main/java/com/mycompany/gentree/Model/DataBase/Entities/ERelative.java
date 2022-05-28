@@ -10,10 +10,10 @@ import jakarta.persistence.Table;
 public class ERelative{
     
     @Id
-    @Column(name = "person_id")
-    Integer personId;
     @Column(name = "rel_id")
     Integer relId;
+    @Column(name = "person_id")
+    Integer personId;
     @Column(name = "role")
     String role;
     public Integer getPersonId() {

@@ -20,6 +20,7 @@ import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.UserTransaction;
 
@@ -113,6 +114,9 @@ public class DataBase implements IDataBase{
         return null;
     }
 
+    //@Override
+    //public String[] getPersonData(Integer id) {entityManager.find(EPerson, id);}
+    
     @Override
     public Integer checkPersonInDataBase(Person data) {
 
@@ -120,7 +124,7 @@ public class DataBase implements IDataBase{
         Integer id = 0;
         try{
             uTransaction.begin();
-            try{ 
+            try{
                 EUser eUser = new EUser();
                 eUser.setUserLogin(data.getEmail());
                 eUser.setUserPassword(data.getPassword());
@@ -159,19 +163,22 @@ public class DataBase implements IDataBase{
         List<String[]> rel = new ArrayList<String[]>() ;
         try 
         {
-            uTransaction.begin();
+            //uTransaction.begin();
             try{
-                ERelative eRelative = new ERelative();
-                System.out.println("DataBase:TypedQuery");
-                //TypedQuery<EUser> query = entityManager.createQuery("SELECT e FROM EUser e WHERE e.userLogin = :login AND e.userPassword = :password", EUser.class)
-                TypedQuery<ERelative> query = entityManager.createQuery("SELECT r FROM ERelative r WHERE r.personId = :id", ERelative.class)
-                    .setParameter("id", id);
-                System.out.println("DataBase:query.getResultList()");
+                TypedQuery<ERelative> query = entityManager.createQuery("SELECT r FROM ERelative r WHERE r.personId = :id", ERelative.class);
+                query.setParameter("id", id);
                 List<ERelative> relatives = query.getResultList();
-                System.out.println("DataBase:add relatiev to list");
+                List<EPerson> relativeData = new ArrayList();
                 for (ERelative e: relatives){
-                    rel.add(new String[]{Integer.toString(e.getRelId()),e.getRole()});
+                    //System.out.println("id: " + e.getRelId() + " role: " + e.getRole());
+                    TypedQuery<EPerson> personQuery = entityManager.createQuery("SELECT p FROM EPerson p WHERE p.id = :id", EPerson.class);
+                    personQuery.setParameter("id", e.getRelId());
+                    relativeData.add(personQuery.getSingleResult());
                 }
+                for(EPerson p: relativeData){
+                    rel.add(new String[]{Integer.toString(p.getId()), p.getName(), p.getSecond_name(), p.getFather_name()});
+                }
+                
                 /*
                 Пример доставания данных
                 for (String[] rels : rel) {
@@ -183,7 +190,7 @@ public class DataBase implements IDataBase{
                 System.out.println("Error Select QUERY");
             }
             
-            uTransaction.commit();		
+            //uTransaction.commit();		
         } 
         catch (Exception e) 
         {
