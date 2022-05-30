@@ -175,8 +175,8 @@ public class DataBase implements IDataBase{
                     personQuery.setParameter("id", e.getRelId());
                     relativeData.add(personQuery.getSingleResult());
                 }
-                for(EPerson p: relativeData){
-                    rel.add(new String[]{Integer.toString(p.getId()), p.getName(), p.getSecond_name(), p.getFather_name()});
+                for(int i = 0; i < relativeData.size(); i++){
+                    rel.add(new String[]{Integer.toString(relativeData.get(i).getId()), relatives.get(i).getRole(), relativeData.get(i).getName(), relativeData.get(i).getSecond_name(), relativeData.get(i).getFather_name()});
                 }
                 
                 /*
