@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.mycompany.gentree.Controller.Person;
 
 import com.mycompany.gentree.Model.DataBase.Entities.EPerson;
@@ -20,7 +23,6 @@ import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.UserTransaction;
 
@@ -158,9 +160,9 @@ public class DataBase implements IDataBase{
     }
 
     @Override
-    public List<String[]> getRelatives(Integer id) {
+    public List<String> getRelatives(Integer id) {
         System.out.println("DataBase::getRelatives");
-        List<String[]> rel = new ArrayList<String[]>() ;
+        List<String> rel = new ArrayList<String>() ;
         try 
         {
             //uTransaction.begin();
@@ -176,7 +178,14 @@ public class DataBase implements IDataBase{
                     relativeData.add(personQuery.getSingleResult());
                 }
                 for(int i = 0; i < relativeData.size(); i++){
-                    rel.add(new String[]{Integer.toString(relativeData.get(i).getId()), relatives.get(i).getRole(), relativeData.get(i).getName(), relativeData.get(i).getSecond_name(), relativeData.get(i).getFather_name()});
+                    JSONObject obj = new JSONObject();
+                    obj.put("id", Integer.toString(relativeData.get(i).getId()));
+                    obj.put("role", relatives.get(i).getRole());
+                    obj.put("firstName", relativeData.get(i).getName());
+                    obj.put("secondName", relativeData.get(i).getSecond_name());
+                    obj.put("fatherName", relativeData.get(i).getFather_name());
+
+                    rel.add(obj.toJSONString());
                 }
                 
                 /*

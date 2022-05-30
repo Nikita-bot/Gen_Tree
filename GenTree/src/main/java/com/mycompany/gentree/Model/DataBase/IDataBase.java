@@ -18,5 +18,5 @@ public interface IDataBase {
     public Integer registrationPerson(Person data);
     public String createPerson(Person data);
     public Integer checkPersonInDataBase(Person data);
-    public List<String[]> getRelatives(Integer id);
+    public List<String> getRelatives(Integer id);
 }

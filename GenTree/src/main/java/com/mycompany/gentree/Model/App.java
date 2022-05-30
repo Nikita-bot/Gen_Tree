@@ -58,16 +58,8 @@ public class App implements IApp{
     public String personalData(String data){
         String login = Token.checkToken(data);
         Integer id = Integer.parseInt(login.substring(login.indexOf(' ') + 1, login.length()));
-        List<String[]> relatives = db.getRelatives(id);
-        for (String[] relative : relatives) {
-            //System.out.println(relative[0] + " " + relative[1] + " " + relative[2] + " " + relative[3]);
-        }
-        StringBuilder sb = new StringBuilder();
-        for (String[] s : relatives){
-            sb.append(String.join(",", s));
-            sb.append("\n");
-        }
-        System.out.println(sb.toString());
-        return sb.toString();
+        List<String> relatives = db.getRelatives(id);
+        
+        return String.join("\n", relatives);
     }
 }
